@@ -39,11 +39,6 @@ const SeasonList = () => {
     setEpisodes(resultAll)
   }
 
-  // const loadEpisode = async () => {
-  //   const data = await fetchOneEpisode('31')
-  //   console.log(data)
-  // }
-
   useEffect(() => {
     loadEpisodes()
   }, [])
