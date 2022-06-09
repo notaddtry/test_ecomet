@@ -3,17 +3,22 @@ import { IEpisode } from '../../types'
 import EpisodeItem from './EpisodeItem'
 
 interface IEpisodeListProps {
-  numOfSeason: number
   episodes: any[] | undefined
 }
 
 const EpisodeList: React.FC<IEpisodeListProps> = ({ episodes }) => {
   return (
-    <div>
-      {episodes?.map((episode) => (
-        <EpisodeItem {...episode} key={episode.id} />
-      ))}
-    </div>
+    <ul className='episodes_wrapper'>
+      {episodes?.length ? (
+        episodes?.map((episode) => (
+          <li key={episode.id} className='row'>
+            <EpisodeItem {...episode} />
+          </li>
+        ))
+      ) : (
+        <span>Серий не найдено</span>
+      )}
+    </ul>
   )
 }
 

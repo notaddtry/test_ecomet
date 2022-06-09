@@ -20,19 +20,20 @@ const EpisodeItem: React.FC<IEpisode> = ({
   characters,
 }) => {
   return (
-    <div>
+    <div className='col s12'>
       <Link to={`/episode/${id}`}>
-        <span>{id}</span>
-        <br />
-        <span>{name}</span>
-        <br />
-        <span>{date}</span>
-        <br />
-        <span>{episode}</span>
-        <br />
-        <span>{characters}</span>
-        <br />
+        <span>Id эпизода: {id}</span>
       </Link>
+
+      <br />
+      <span>Название эпизода: {name}</span>
+      <br />
+      <span>Дата выхода эпизода: {date}</span>
+      <br />
+      <span>Номер серии в сезоне: {episode.slice(4, 6)}</span>
+      <br />
+      <span>Число персонажей: {characters.length}</span>
+      <br />
     </div>
   )
 }

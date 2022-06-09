@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { fetchOneEpisode, fetchEpisodes } from '../../api'
 import { IEpisode } from '../../types'
 import SeasonItem from './SeasonItem'
 
 const SEASONS = [
   {
-    id: '1',
-    name: 'first',
+    id: 1,
   },
   {
-    id: '2',
-    name: 'second',
+    id: 2,
   },
   {
-    id: '3',
-    name: 'third',
+    id: 3,
   },
   {
-    id: '4',
-    name: 'fourth',
+    id: 4,
   },
   {
-    id: '5',
-    name: 'fifth',
+    id: 5,
   },
 ]
 
@@ -44,15 +39,13 @@ const SeasonList = () => {
   }, [])
 
   return (
-    <div>
+    <ul className='seasons_wrapper'>
       {SEASONS.map((season) => (
-        <SeasonItem
-          numOfSeason={+season.id}
-          key={+season.id}
-          episodes={episodes}
-        />
+        <li className='row' key={season.id}>
+          <SeasonItem numOfSeason={season.id} episodes={episodes} />
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }
 

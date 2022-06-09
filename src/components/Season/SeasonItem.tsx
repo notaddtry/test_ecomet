@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 // import { fetchEpisodes } from '../../api/useFetch'
 import { IEpisode } from '../../types'
 import EpisodeList from '../Episode/EpisodeList'
+import Search from '../Search/Search'
 
 interface IEpisodeListProps {
   numOfSeason: number
@@ -12,7 +13,10 @@ const SeasonItem: React.FC<IEpisodeListProps> = ({
   numOfSeason,
   episodes: episodesProps,
 }) => {
-  const [episodes, setEpisodes] = useState<any[]>()
+  const [episodes, setEpisodes] = useState<IEpisode[]>([])
+  const [searchedEpisodes, setSearchedEpisodes] =
+    useState<IEpisode[] | null>(null)
+  const [search, setSearch] = useState('')
 
   const filterEpisodes = () => {
     if (episodesProps) {
@@ -25,16 +29,31 @@ const SeasonItem: React.FC<IEpisodeListProps> = ({
     }
   }
 
+  const searchEpisodes = () => {
+    if (!search.trim()) {
+      setSearchedEpisodes([])
+    }
+    const filterredEpisodes = episodes?.filter((episode) =>
+      episode.name.includes(search)
+    )
+    setSearchedEpisodes(filterredEpisodes)
+  }
+
   useEffect(() => {
     filterEpisodes()
   }, [episodesProps])
 
   return (
-    <div>
+    <div className='col s12'>
+      <h2>Сезон {numOfSeason}</h2>
+      <Search
+        search={search}
+        setSearch={setSearch}
+        searchEpisodes={searchEpisodes}
+      />
       <EpisodeList
-        numOfSeason={numOfSeason}
         key={numOfSeason}
-        episodes={episodes}
+        episodes={searchedEpisodes ? searchedEpisodes : episodes}
       />
     </div>
   )

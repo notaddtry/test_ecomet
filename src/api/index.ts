@@ -24,3 +24,19 @@ export const fetchOneEpisode = async (id: string) => {
 
   return data
 }
+
+export const fetchOneCharacter = async (id: string) => {
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/character/${id}`
+  )
+  const data = response.json()
+
+  return data
+}
+
+export const fetchOneLocation = async (id: string) => {
+  const response = await fetch(`https://rickandmortyapi.com/api/location/${id}`)
+  const data = response.json()
+
+  return data
+}
