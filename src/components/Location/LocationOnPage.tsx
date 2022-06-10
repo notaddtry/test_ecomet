@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import { fetchOneLocation } from '../../api'
+import { fetchOneLocation } from '../../lib/api'
 import { ILocation } from '../../types'
 
 const LocationOnPage = () => {

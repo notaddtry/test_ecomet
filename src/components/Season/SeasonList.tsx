@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { fetchOneEpisode, fetchEpisodes } from '../../api'
+import { fetchOneEpisode, fetchEpisodes } from '../../lib/api'
 import { IEpisode } from '../../types'
 import SeasonItem from './SeasonItem'
 

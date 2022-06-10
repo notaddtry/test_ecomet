@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
-import { fetchOneEpisode, fetchOneCharacter } from '../../api'
+import { fetchOneEpisode, fetchOneCharacter } from '../../lib/api'
 import { ICharacter, IEpisode } from '../../types'
 
 const EpisodeOnPage = () => {

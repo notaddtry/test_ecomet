@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
-import { fetchOneCharacter } from '../../api'
+import { fetchOneCharacter } from '../../lib/api'
 import { ICharacter } from '../../types'
 
 const CharacretOnPage = () => {

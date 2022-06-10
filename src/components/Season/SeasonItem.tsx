@@ -4,6 +4,8 @@ import { IEpisode } from '../../types'
 import EpisodeList from '../Episode/EpisodeList'
 import Search from '../Search/Search'
 
+import styles from './season.module.css'
+
 interface IEpisodeListProps {
   numOfSeason: number
   episodes: any[]
@@ -46,11 +48,14 @@ const SeasonItem: React.FC<IEpisodeListProps> = ({
   return (
     <div className='col s12'>
       <h2>Сезон {numOfSeason}</h2>
+
       <Search
         search={search}
         setSearch={setSearch}
         searchEpisodes={searchEpisodes}
+        numOfSeason={numOfSeason}
       />
+
       <EpisodeList
         key={numOfSeason}
         episodes={searchedEpisodes ? searchedEpisodes : episodes}

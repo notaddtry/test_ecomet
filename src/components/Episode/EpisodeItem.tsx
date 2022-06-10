@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-// id, название, дата выхода и порядковый номер эпизода в сезоне, число персонажей
-// спользование REST API для получения данных с сервера
+import styles from './episode.module.css'
 
 interface IEpisode {
   id: number
@@ -21,19 +20,25 @@ const EpisodeItem: React.FC<IEpisode> = ({
 }) => {
   return (
     <div className='col s12'>
-      <Link to={`/episode/${id}`}>
-        <span>Id эпизода: {id}</span>
-      </Link>
-
-      <br />
-      <span>Название эпизода: {name}</span>
-      <br />
-      <span>Дата выхода эпизода: {date}</span>
-      <br />
-      <span>Номер серии в сезоне: {episode.slice(4, 6)}</span>
-      <br />
-      <span>Число персонажей: {characters.length}</span>
-      <br />
+      <div className='row flex_center'>
+        <Link
+          className={`col s2 block_center center ${styles.text_columns}`}
+          to={`/episode/${id}`}>
+          <span>{id}</span>
+        </Link>
+        <span className={`col s2 block_center center ${styles.text_columns}`}>
+          {name}
+        </span>
+        <span className={`col s2 block_center center ${styles.text_columns}`}>
+          {date}
+        </span>
+        <span className={`col s2 block_center center ${styles.text_columns}`}>
+          {episode.slice(4, 6)}
+        </span>
+        <span className={`col s2 block_center center ${styles.text_columns}`}>
+          {characters.length}
+        </span>
+      </div>
     </div>
   )
 }
