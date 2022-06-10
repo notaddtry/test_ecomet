@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { IEpisode } from '../../types'
+import { IEpisode, ISortedEpisodes } from '../../types'
 import EpisodeItem from './EpisodeItem'
 
-import styles from './episode.module.css'
 import { sortById } from '../../lib/helpers'
+import EpisodeSpan from './EpisodeSpan'
 
 interface IEpisodeListProps {
   episodes: IEpisode[] | undefined
@@ -25,16 +25,13 @@ const EpisodeList: React.FC<IEpisodeListProps> = ({
     console.log(episodes)
   }
 
-  const handleSort = (
-    propsToSort: 'byId' | 'byName' | 'byDate' | 'byNumOfEp' | 'byLenOfChar'
-  ) => {
+  const handleSort = (propsToSort: ISortedEpisodes) => {
     setSortedEpisodes((prev) => ({
       byId: false,
       byName: false,
       byDate: false,
       byNumOfEp: false,
       byLenOfChar: false,
-
       [propsToSort]: !prev[propsToSort],
     }))
     if (episodesProps) {
@@ -47,8 +44,6 @@ const EpisodeList: React.FC<IEpisodeListProps> = ({
     }
   }
 
-  useEffect(() => {}, [sortedEpisodes])
-
   useEffect(() => {
     setEpisodes(episodesProps)
   }, [episodesProps])
@@ -57,51 +52,41 @@ const EpisodeList: React.FC<IEpisodeListProps> = ({
     <>
       <button onClick={logClick}>log</button>
       <div className='row flex_center'>
-        <span
-          className={`col s2 block_center center ${styles.text_columns}`}
-          onClick={() => handleSort('byId')}>
-          Id эпизода
-          <i className='material-icons tiny'>
-            {sortedEpisodes.byId ? 'arrow_drop_up' : 'arrow_drop_down'}
-          </i>
-        </span>
-        <span
-          className={`col s2 block_center center ${styles.text_columns}`}
-          onClick={() => handleSort('byName')}>
-          Название
-          <i className='material-icons tiny'>
-            {sortedEpisodes.byName ? 'arrow_drop_up' : 'arrow_drop_down'}
-          </i>
-        </span>
-        <span
-          className={`col s2 block_center center ${styles.text_columns}`}
-          onClick={() => handleSort('byDate')}>
-          Дата выхода
-          <i className='material-icons tiny'>
-            {sortedEpisodes.byDate ? 'arrow_drop_up' : 'arrow_drop_down'}
-          </i>
-        </span>
-        <span
-          className={`col s2 block_center center ${styles.text_columns}`}
-          onClick={() => handleSort('byNumOfEp')}>
-          Номер в сезоне
-          <i className='material-icons tiny'>
-            {sortedEpisodes.byNumOfEp ? 'arrow_drop_up' : 'arrow_drop_down'}
-          </i>
-        </span>
-        <span
-          className={`col s2 block_center center ${styles.text_columns}`}
-          onClick={() => handleSort('byLenOfChar')}>
-          Число персонажей
-          <i className='material-icons tiny'>
-            {sortedEpisodes.byLenOfChar ? 'arrow_drop_up' : 'arrow_drop_down'}
-          </i>
-        </span>
+        <EpisodeSpan
+          sortedEpisodes={sortedEpisodes}
+          prop={'byId'}
+          handleSort={handleSort}
+          message={'Id эпизода'}
+        />
+        <EpisodeSpan
+          sortedEpisodes={sortedEpisodes}
+          prop={'byName'}
+          handleSort={handleSort}
+          message={'Название'}
+        />
+        <EpisodeSpan
+          sortedEpisodes={sortedEpisodes}
+          prop={'byDate'}
+          handleSort={handleSort}
+          message={'Дата выхода'}
+        />
+        <EpisodeSpan
+          sortedEpisodes={sortedEpisodes}
+          prop={'byNumOfEp'}
+          handleSort={handleSort}
+          message={'Номер в сезоне'}
+        />
+        <EpisodeSpan
+          sortedEpisodes={sortedEpisodes}
+          prop={'byLenOfChar'}
+          handleSort={handleSort}
+          message={'Число персонажей'}
+        />
       </div>
-      <ul className='episodes_wrapper'>
+      <ul className='episodes_wrapper collection'>
         {episodes?.length ? (
           episodes?.map((episode) => (
-            <li key={episode.id} className='row'>
+            <li key={episode.id} className='row collection-item'>
               <EpisodeItem {...episode} />
             </li>
           ))

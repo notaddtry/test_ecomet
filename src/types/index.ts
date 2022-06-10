@@ -41,3 +41,10 @@ export interface ILocation {
   url: string[]
   created: string
 }
+
+export type ISortedEpisodes =
+  | 'byId'
+  | 'byName'
+  | 'byDate'
+  | 'byNumOfEp'
+  | 'byLenOfChar'
