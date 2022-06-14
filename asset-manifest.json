@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/test_ecomet/static/css/main.cbeeb3fd.css",
-    "main.js": "/test_ecomet/static/js/main.fd7a43a2.js",
+    "main.css": "/test_ecomet/static/css/main.18d040cf.css",
+    "main.js": "/test_ecomet/static/js/main.15311c79.js",
     "index.html": "/test_ecomet/index.html",
-    "main.cbeeb3fd.css.map": "/test_ecomet/static/css/main.cbeeb3fd.css.map",
-    "main.fd7a43a2.js.map": "/test_ecomet/static/js/main.fd7a43a2.js.map"
+    "main.18d040cf.css.map": "/test_ecomet/static/css/main.18d040cf.css.map",
+    "main.15311c79.js.map": "/test_ecomet/static/js/main.15311c79.js.map"
   },
   "entrypoints": [
-    "static/css/main.cbeeb3fd.css",
-    "static/js/main.fd7a43a2.js"
+    "static/css/main.18d040cf.css",
+    "static/js/main.15311c79.js"
   ]
 }
