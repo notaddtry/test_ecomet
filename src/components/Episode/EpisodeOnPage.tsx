@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
+
 import { fetchOneEpisode, fetchOneCharacter } from '../../lib/api'
 import { ICharacter, IEpisode } from '../../types'
 
-const EpisodeOnPage = () => {
+import Loader from '../Loader'
+
+const EpisodeOnPage: React.FC = () => {
   const [episode, setEpisode] = useState<IEpisode>()
   const [characters, setCharacters] = useState<ICharacter[]>([])
   const [isCharactersLoaded, setCharastersLoaded] = useState(false)
@@ -29,17 +32,19 @@ const EpisodeOnPage = () => {
 
   useEffect(() => {
     loadEpisode()
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
     setCharastersLoaded(false)
     loadCharacters()
+    // eslint-disable-next-line
   }, [episode])
 
   const charactersLoaded = () => {
     return characters.map((character) => (
-      <span style={{ marginRight: '.5rem' }} key={character.id}>
-        <Link to={`/character/${character.id}`}>{character.name}</Link>
+      <span style={{ marginLeft: '.5rem' }} key={character.id}>
+        <Link to={`/character/${character.id}`}>{character.name}</Link>,
       </span>
     ))
   }
@@ -54,7 +59,7 @@ const EpisodeOnPage = () => {
       <br />
       <span>
         Персонажи в эпизоде:
-        {isCharactersLoaded ? charactersLoaded() : <span>Загрузка...</span>}
+        {isCharactersLoaded ? charactersLoaded() : <Loader />}
       </span>
       <br />
     </div>

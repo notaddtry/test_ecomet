@@ -1,65 +1,66 @@
+import { useStore } from 'effector-react'
 import React, { useEffect, useState } from 'react'
-// import { fetchEpisodes } from '../../api/useFetch'
+
+import { $episodes, getEpisodesFx } from '../../store'
 import { IEpisode } from '../../types'
+
 import EpisodeList from '../Episode/EpisodeList'
 import Search from '../Search/Search'
 
-import styles from './season.module.css'
-
 interface IEpisodeListProps {
   numOfSeason: number
-  episodes: any[]
 }
 
-const SeasonItem: React.FC<IEpisodeListProps> = ({
-  numOfSeason,
-  episodes: episodesProps,
-}) => {
+const SeasonItem: React.FC<IEpisodeListProps> = ({ numOfSeason }) => {
   const [episodes, setEpisodes] = useState<IEpisode[]>([])
-  const [searchedEpisodes, setSearchedEpisodes] =
-    useState<IEpisode[] | null>(null)
   const [search, setSearch] = useState('')
+  const episodesStore = useStore($episodes)
 
   const filterEpisodes = () => {
-    if (episodesProps) {
-      const filterredEpisodes = episodesProps.filter(
-        (episodeProps) =>
-          +episodeProps.episode.split('E')[0].at(-1)! === numOfSeason
+    if (episodesStore) {
+      const filterredEpisodes = episodesStore.filter(
+        (episode) => +episode.episode.split('E')[0].at(-1)! === numOfSeason
       )
 
-      setEpisodes(filterredEpisodes)
+      return filterredEpisodes
     }
   }
 
   const searchEpisodes = () => {
-    if (!search.trim()) {
-      setSearchedEpisodes([])
+    const data = filterEpisodes()
+    if (data) {
+      if (!search.trim()) {
+        return setEpisodes(data)
+      }
+      const filterredEpisodes = data?.filter((episode) => {
+        return episode.name.toLowerCase().includes(search.toLowerCase())
+      })
+      setEpisodes(filterredEpisodes)
     }
-    const filterredEpisodes = episodes?.filter((episode) =>
-      episode.name.includes(search)
-    )
-    setSearchedEpisodes(filterredEpisodes)
   }
 
   useEffect(() => {
-    filterEpisodes()
-  }, [episodesProps])
+    getEpisodesFx()
+  }, [])
+
+  useEffect(() => {
+    const data = filterEpisodes()
+    if (data) {
+      setEpisodes(data)
+    }
+    // eslint-disable-next-line
+  }, [episodesStore])
 
   return (
     <div className='col s12'>
       <h2>Сезон {numOfSeason}</h2>
-
       <Search
         search={search}
         setSearch={setSearch}
         searchEpisodes={searchEpisodes}
         numOfSeason={numOfSeason}
       />
-
-      <EpisodeList
-        key={numOfSeason}
-        episodes={searchedEpisodes ? searchedEpisodes : episodes}
-      />
+      <EpisodeList key={numOfSeason} episodes={episodes} />
     </div>
   )
 }

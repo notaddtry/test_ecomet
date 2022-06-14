@@ -15,7 +15,7 @@ export function sortById(
       break
 
     case 'byDate':
-      props = 'air_date'
+      props = 'id'
       break
 
     case 'byNumOfEp':

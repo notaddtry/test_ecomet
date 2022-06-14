@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { fetchOneEpisode, fetchEpisodes } from '../../lib/api'
-import { IEpisode } from '../../types'
+import React from 'react'
+
 import SeasonItem from './SeasonItem'
 
 const SEASONS = [
@@ -21,28 +20,12 @@ const SEASONS = [
   },
 ]
 
-const SeasonList = () => {
-  const [episodes, setEpisodes] = useState<any>()
-
-  const loadEpisodes = async () => {
-    let AllResult = await fetchEpisodes()
-    let resultAll: any[] = []
-    AllResult.forEach((result) => {
-      resultAll.push(result.results)
-    })
-    resultAll = resultAll.flat()
-    setEpisodes(resultAll)
-  }
-
-  useEffect(() => {
-    loadEpisodes()
-  }, [])
-
+const SeasonList: React.FC = () => {
   return (
     <ul className='seasons_wrapper'>
       {SEASONS.map((season) => (
         <li className='row' key={season.id}>
-          <SeasonItem numOfSeason={season.id} episodes={episodes} />
+          <SeasonItem numOfSeason={season.id} />
         </li>
       ))}
     </ul>

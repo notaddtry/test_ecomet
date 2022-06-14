@@ -13,28 +13,30 @@ const Search: React.FC<ISearch> = ({
   searchEpisodes,
   numOfSeason,
 }) => {
-  useEffect(() => {
-    M.updateTextFields()
-  }, [])
-
   const onKeyPressSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       searchEpisodes()
     }
   }
 
+  useEffect(() => {
+    M.updateTextFields()
+  }, [])
+
   return (
     <div className='row'>
       <div className='input-field col s11'>
         <input
-          placeholder='Placeholder'
+          placeholder='Enter name of episode..'
           id={`${numOfSeason}_search`}
           type='text'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => onKeyPressSearch(e)}
         />
-        <label htmlFor={`${numOfSeason}_search`}>First Name</label>
+        <label htmlFor={`${numOfSeason}_search`}>
+          Episode's name in {numOfSeason} season
+        </label>
       </div>
       <button
         className='btn col s1 deep-purple darken-1'

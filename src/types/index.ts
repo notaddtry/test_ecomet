@@ -19,7 +19,7 @@ export interface ICharacter {
   species: string
   type: string
   gender: string
-  origin: object
+  origin: ICharacterLocation
   location: ICharacterLocation
   image: string
   episode: string[]

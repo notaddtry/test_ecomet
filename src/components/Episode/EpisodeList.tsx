@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { IEpisode, ISortedEpisodes } from '../../types'
-import EpisodeItem from './EpisodeItem'
+import { useStore } from 'effector-react'
 
+import { IEpisode, ISortedEpisodes } from '../../types'
 import { sortById } from '../../lib/helpers'
+import { getEpisodesFx } from '../../store'
+
+import EpisodeItem from './EpisodeItem'
 import EpisodeSpan from './EpisodeSpan'
+import Loader from '../Loader'
 
 interface IEpisodeListProps {
   episodes: IEpisode[] | undefined
@@ -20,18 +24,12 @@ const EpisodeList: React.FC<IEpisodeListProps> = ({
     byLenOfChar: false,
   })
   const [episodes, setEpisodes] = useState<IEpisode[] | undefined>([])
-
-  const logClick = () => {
-    console.log(episodes)
-  }
+  const isLoading = useStore(getEpisodesFx.pending)
+  const [isReady, setReady] = useState(false)
 
   const handleSort = (propsToSort: ISortedEpisodes) => {
     setSortedEpisodes((prev) => ({
-      byId: false,
-      byName: false,
-      byDate: false,
-      byNumOfEp: false,
-      byLenOfChar: false,
+      ...prev,
       [propsToSort]: !prev[propsToSort],
     }))
     if (episodesProps) {
@@ -46,54 +44,55 @@ const EpisodeList: React.FC<IEpisodeListProps> = ({
 
   useEffect(() => {
     setEpisodes(episodesProps)
+    if (!isReady) setReady(true)
+    // eslint-disable-next-line
   }, [episodesProps])
+
+  if (isLoading || !isReady) {
+    return <Loader />
+  }
 
   return (
     <>
-      <button onClick={logClick}>log</button>
       <div className='row flex_center'>
         <EpisodeSpan
-          sortedEpisodes={sortedEpisodes}
           prop={'byId'}
           handleSort={handleSort}
           message={'Id эпизода'}
         />
         <EpisodeSpan
-          sortedEpisodes={sortedEpisodes}
           prop={'byName'}
           handleSort={handleSort}
           message={'Название'}
         />
         <EpisodeSpan
-          sortedEpisodes={sortedEpisodes}
           prop={'byDate'}
           handleSort={handleSort}
           message={'Дата выхода'}
         />
         <EpisodeSpan
-          sortedEpisodes={sortedEpisodes}
           prop={'byNumOfEp'}
           handleSort={handleSort}
           message={'Номер в сезоне'}
         />
         <EpisodeSpan
-          sortedEpisodes={sortedEpisodes}
           prop={'byLenOfChar'}
           handleSort={handleSort}
           message={'Число персонажей'}
         />
       </div>
-      <ul className='episodes_wrapper collection'>
-        {episodes?.length ? (
-          episodes?.map((episode) => (
+
+      {!episodes?.length ? (
+        <span>Серий не найдено</span>
+      ) : (
+        <ul className='episodes_wrapper collection'>
+          {episodes?.map((episode) => (
             <li key={episode.id} className='row collection-item'>
               <EpisodeItem {...episode} />
             </li>
-          ))
-        ) : (
-          <span>Серий не найдено</span>
-        )}
-      </ul>
+          ))}
+        </ul>
+      )}
     </>
   )
 }
