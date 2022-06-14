@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/test_ecomet/static/css/main.cbeeb3fd.css",
+    "main.js": "/test_ecomet/static/js/main.34bfeace.js",
+    "index.html": "/test_ecomet/index.html",
+    "main.cbeeb3fd.css.map": "/test_ecomet/static/css/main.cbeeb3fd.css.map",
+    "main.34bfeace.js.map": "/test_ecomet/static/js/main.34bfeace.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cbeeb3fd.css",
+    "static/js/main.34bfeace.js"
+  ]
+}
