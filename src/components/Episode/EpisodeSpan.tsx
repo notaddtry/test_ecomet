@@ -16,7 +16,7 @@ const EpisodeSpan: React.FC<IEpisodeSpanProps> = ({
 }) => {
   return (
     <span
-      className={`col s2 block_center center ${styles.text_columns}`}
+      className={`col s2 block_center center ${styles.text_columns} text_cursor`}
       onClick={() => handleSort(prop)}>
       {message}
     </span>
