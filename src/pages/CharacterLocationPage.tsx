@@ -1,7 +1,8 @@
 import React from 'react'
+
 import LocationOnPage from '../components/Location/LocationOnPage'
 
-const CharacterLocationPage = () => {
+const CharacterLocationPage: React.FC = () => {
   return (
     <div>
       <LocationOnPage />

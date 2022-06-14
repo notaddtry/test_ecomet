@@ -1,6 +1,8 @@
+import React from 'react'
+
 import CharacretOnPage from '../components/Character/CharacretOnPage'
 
-const CharacterPage = () => {
+const CharacterPage: React.FC = () => {
   return (
     <>
       <CharacretOnPage />

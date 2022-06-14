@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
+import ScrollToTop from './components/ScrollToTop'
 import useRoutes from './routes'
 
 const App = () => {
@@ -7,8 +8,10 @@ const App = () => {
 
   return (
     <div className='wrapper'>
-      <Router basename='/'>
-        <>{routes}</>
+      <Router basename='/test_ecomet'>
+        <ScrollToTop>
+          <>{routes}</>
+        </ScrollToTop>
       </Router>
     </div>
   )
