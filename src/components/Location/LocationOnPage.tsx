@@ -32,13 +32,11 @@ const LocationOnPage: React.FC = () => {
 
   useEffect(() => {
     loadLocaion()
-    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
     setCharastersLoaded(false)
     loadCharacters()
-    // eslint-disable-next-line
   }, [location])
 
   const charactersLoaded = () => {

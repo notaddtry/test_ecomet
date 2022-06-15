@@ -48,7 +48,6 @@ const SeasonItem: React.FC<IEpisodeListProps> = ({ numOfSeason }) => {
     if (data) {
       setEpisodes(data)
     }
-    // eslint-disable-next-line
   }, [episodesStore])
 
   return (

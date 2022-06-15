@@ -45,7 +45,6 @@ const EpisodeList: React.FC<IEpisodeListProps> = ({
   useEffect(() => {
     setEpisodes(episodesProps)
     if (!isReady) setReady(true)
-    // eslint-disable-next-line
   }, [episodesProps])
 
   if (isLoading || !isReady) {

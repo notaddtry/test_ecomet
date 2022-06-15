@@ -32,13 +32,11 @@ const EpisodeOnPage: React.FC = () => {
 
   useEffect(() => {
     loadEpisode()
-    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
     setCharastersLoaded(false)
     loadCharacters()
-    // eslint-disable-next-line
   }, [episode])
 
   const charactersLoaded = () => {

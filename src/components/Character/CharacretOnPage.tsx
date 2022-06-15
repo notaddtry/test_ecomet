@@ -16,7 +16,6 @@ const CharacretOnPage: React.FC = () => {
 
   useEffect(() => {
     loadCharacter()
-    // eslint-disable-next-line
   }, [])
 
   return (
